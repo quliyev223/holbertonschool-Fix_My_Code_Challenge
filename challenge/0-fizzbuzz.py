@@ -16,11 +16,14 @@ def fizzbuzz(n):
         return
 
     tmp_result = []
+# Check for FizzBuzz first (multiples of both 3 and 5) before checking
+# individually, otherwise the first condition would always catch multiples
+# of 15 and FizzBuzz would never be reached.
     for i in range(1, n + 1):
-        if (i % 3) == 0:
-            tmp_result.append("Fizz")
-        elif (i % 3) == 0 and (i % 5) == 0:
+        if (i % 3) == 0 and (i % 5) == 0:
             tmp_result.append("FizzBuzz")
+        elif (i % 3) == 0:
+            tmp_result.append("Fizz")
         elif (i % 5) == 0:
             tmp_result.append("Buzz")
         else:
