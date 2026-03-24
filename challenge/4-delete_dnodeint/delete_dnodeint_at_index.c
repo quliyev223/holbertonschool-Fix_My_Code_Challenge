@@ -1,6 +1,5 @@
 #include "lists.h"
 #include <stdlib.h>
-
 /**
  * delete_dnodeint_at_index - Delete a node at a specific index from a list
  *
@@ -42,15 +41,15 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		}
 	}
 	else
-        {
-            dlistint_t *prev_node = (*head)->prev;
-            dlistint_t *next_node = (*head)->next;
+	{
+		dlistint_t *prev_node = (*head)->prev;
+		dlistint_t *next_node = (*head)->next;
 
-            prev_node->next = next_node;          // Fix 1: link previous node to next
-            if (next_node != NULL)
-                next_node->prev = prev_node;      // Fix 2: link next node back to previous (before free)
-            free(*head);
-            *head = saved_head;
-        }
+		prev_node->next = next_node;         /* Fixed: was ->prev->prev, should link prev to next node */
+		if (next_node != NULL)
+			next_node->prev = prev_node;     /* Fixed: moved before free() to avoid undefined behavior */
+		free(*head);
+		*head = saved_head;
+	}
 	return (1);
 }
