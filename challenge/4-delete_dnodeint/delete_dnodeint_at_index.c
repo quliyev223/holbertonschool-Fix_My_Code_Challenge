@@ -42,12 +42,15 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
 		}
 	}
 	else
-	{
-		(*head)->prev->prev = (*head)->prev;
-		free(*head);
-		if ((*head)->next)
-			(*head)->next->prev = (*head)->prev;
-		*head = saved_head;
-	}
+        {
+            dlistint_t *prev_node = (*head)->prev;
+            dlistint_t *next_node = (*head)->next;
+
+            prev_node->next = next_node;          // Fix 1: link previous node to next
+            if (next_node != NULL)
+                next_node->prev = prev_node;      // Fix 2: link next node back to previous (before free)
+            free(*head);
+            *head = saved_head;
+        }
 	return (1);
 }
