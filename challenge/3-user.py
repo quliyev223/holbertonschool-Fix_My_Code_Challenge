@@ -39,7 +39,7 @@ class User():
         if pwd is None or type(pwd) is not str:
             self.__password = None
         else:
-            self.__password = hashlib.md5(pwd.encode()).hexdigest().lower()  # Fixed: was self._password (single underscore), causing password to be stored in wrong attribute
+            self.__password = hashlib.md5(pwd.encode()).hexdigest().lower()  # Fixed: single underscore attribute was used instead of double underscore (private)
 
     def is_valid_password(self, pwd):
         """
