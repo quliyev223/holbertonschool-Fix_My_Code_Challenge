@@ -53,7 +53,7 @@ class User():
             return False
         if self.__password is None:
             return False
-        return hashlib.md5(pwd.encode()).hexdigest().lower() == self.__password  # Fixed: was .upper(), mismatched with .lower() used when storing — comparison always failed
+        return hashlib.md5(pwd.encode()).hexdigest().lower() == self.__password  # Fixed: wrong case method was used, causing hash comparison to always fail
 
 
 if __name__ == '__main__':
